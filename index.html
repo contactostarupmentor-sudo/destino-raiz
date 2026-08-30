@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0e0b08"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="description" content="Destino Raíz · Móstoles. Carta digital, brasa, cócteles y reservas. Plaza del Sol 35."/>
+<title>Destino Raíz · Carta & Reservas — Móstoles</title>
+<link rel="icon" href="favicon.jpg" type="image/jpeg"/>
+<link rel="apple-touch-icon" href="favicon.jpg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body id="top">
+
+<!-- TOPBAR -->
+<header class="topbar" id="topbar">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Destino Raíz inicio">DESTINO<span>raíz</span></a>
+    <nav class="links" id="topLinks" aria-label="Secciones">
+      <a href="#promos">Promos</a>
+      <a href="#destacados">Destacados</a>
+      <a href="#carta">Carta</a>
+      <a href="#desayunos">Desayunos</a>
+      <div class="nav-drop" id="barraDrop">
+        <button type="button" class="nav-drop-btn" id="barraDropBtn" aria-expanded="false" aria-haspopup="true">
+          Barra
+          <svg class="chev" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-drop-menu" id="barraDropMenu" role="menu" hidden>
+          <a href="#bebidas" role="menuitem">Ver toda la barra</a>
+          <div class="nav-drop-sep"></div>
+          <div id="barraDropLinks"></div>
+        </div>
+      </div>
+      <a href="#reservas">Reservas</a>
+    </nav>
+    <div class="bar-right">
+      <button class="btn btn-gold btn-sm" type="button" data-open-reserve>Reservar</button>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" aria-hidden="true" role="dialog" aria-label="Menú">
+  <button class="mnav-close" id="mnavClose" aria-label="Cerrar">✕</button>
+  <div class="mnav-links">
+    <a href="#promos">Promociones</a>
+    <a href="#destacados">Destacados</a>
+    <a href="#carta">La carta</a>
+    <a href="#desayunos">Desayunos</a>
+    <div class="mnav-barra">
+      <button type="button" class="mnav-barra-btn" id="mnavBarraBtn" aria-expanded="false">
+        La barra
+        <svg class="chev" width="12" height="8" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <div class="mnav-barra-list" id="mnavBarraList" hidden></div>
+    </div>
+    <a href="#reservas">Reservar mesa</a>
+    <a href="#visitanos">Visítanos</a>
+  </div>
+  <button class="btn btn-gold" type="button" data-open-reserve>Reservar ahora</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slider" id="heroSlider" aria-hidden="true"></div>
+  <div class="hero-veil"></div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Cocina mediterránea · Plaza del Sol, Móstoles</p>
+    <h1>Destino <em>Raíz</em></h1>
+    <p class="hero-sub">Producto de mercado, brasa y coctelería con alma. De desayuno a copa: el punto de encuentro de Móstoles.</p>
+    <div class="hero-cta">
+      <a href="#carta" class="btn btn-gold">Ver la carta</a>
+      <button class="btn btn-ghost" type="button" data-open-reserve>Reservar mesa</button>
+    </div>
+    <div class="hero-badges">
+      <span class="badge-star">★ 8,9</span>
+      <span>152 opiniones · TheFork</span>
+      <span class="dot-sep">·</span>
+      <span>~25 €</span>
+      <span class="dot-sep">·</span>
+      <span>13:00 – 01:00</span>
+    </div>
+  </div>
+  <a class="scroll-hint" href="#promos" aria-label="Bajar a promociones">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
+
+<!-- PROMOS -->
+<section id="promos" class="section">
+  <div class="wrap">
+    <div class="promo-top">
+      <div>
+        <div class="sec-head"><span class="sec-num">01</span><h2>Promociones</h2></div>
+        <p class="sec-sub">Cada día tiene su plan. Desliza o toca las flechas.</p>
+      </div>
+      <div class="promo-nav">
+        <button class="nav-btn" id="promoPrev" aria-label="Anterior">←</button>
+        <button class="nav-btn" id="promoNext" aria-label="Siguiente">→</button>
+      </div>
+    </div>
+    <div class="promo-viewport" id="promoViewport">
+      <div class="promo-track" id="promoTrack"></div>
+    </div>
+    <div class="promo-dots" id="promoDots" role="tablist" aria-label="Promociones"></div>
+    <p class="promo-note">✦ Sujetas a disponibilidad. Consulta condiciones con el equipo.</p>
+  </div>
+</section>
+
+<!-- DESTACADOS / GALERÍA -->
+<section id="destacados" class="section section-tight">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Nuestros platos</h2></div>
+    <p class="sec-sub">Fotos reales de la casa. Toca para ver detalle y precio.</p>
+  </div>
+  <div class="feat-rail" id="featRail" tabindex="0" aria-label="Galería de platos"></div>
+  <div class="wrap">
+    <div class="feat-hint">← Desliza para ver más →</div>
+  </div>
+</section>
+
+<!-- CARTA -->
+<section id="carta" class="section">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>La carta</h2></div>
+    <p class="sec-sub">Para compartir, picar o darte un homenaje.</p>
+    <div class="search-wrap">
+      <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="menuSearch" type="search" placeholder="Busca un plato o ingrediente…" autocomplete="off" enterkeyhint="search"/>
+      <button class="search-clear" id="searchClear" aria-label="Borrar" hidden>✕</button>
+    </div>
+  </div>
+  <div class="pills-bar" id="pillsBar">
+    <div class="wrap"><div class="pills" id="pills" role="tablist"></div></div>
+  </div>
+  <div class="wrap">
+    <div id="searchResults" class="search-results"></div>
+    <div id="cats"></div>
+    <p class="allergen">¿Alergias o intolerancias? Avísanos: adaptamos platos y hay opciones <b>sin gluten</b>. Tu seguridad es lo primero.</p>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-band" id="quoteBand">
+  <div class="wrap">
+    <p class="quote">«Producto de mercado, <em>brasa</em> y mucha raíz.»</p>
+    <span class="quote-src">El espíritu de la casa · Móstoles</span>
+  </div>
+</section>
+
+<!-- MENÚS DEL DÍA -->
+<section id="menus" class="section section-tight">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Menús</h2></div>
+    <div class="menus-grid" id="menusGrid"></div>
+  </div>
+</section>
+
+<!-- DESAYUNOS -->
+<section id="desayunos" class="section">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Desayunos &amp; meriendas</h2></div>
+    <p class="sec-sub">Café de los buenos, tostadas de autor, churros y meriendas con calma.</p>
+    <div class="break-grid">
+      <div class="break-gallery" id="breakGallery"></div>
+      <div class="break-groups" id="breakGroups"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BEBIDAS -->
+<section id="bebidas" class="section">
+  <div class="wrap">
+    <div class="drinks-head">
+      <div>
+        <div class="sec-head"><span class="sec-num">06</span><h2>La barra</h2></div>
+        <p class="sec-sub">Cócteles, vinos, cervezas, shishas y mucho más. Elige categoría o baja: <b>todo está a la vista</b>.</p>
+      </div>
+    </div>
+    <div class="drink-highlights" id="drinkHighlights" aria-label="Categorías de la barra"></div>
+  </div>
+  <div class="drink-pills-bar" id="drinkPillsBar">
+    <div class="wrap"><div class="pills" id="drinkPills" role="tablist" aria-label="Categorías barra"></div></div>
+  </div>
+  <div class="wrap">
+    <div id="drinkSections"></div>
+  </div>
+</section>
+
+<!-- RESERVAS -->
+<section id="reservas" class="section reserve-section">
+  <div class="wrap reserve-wrap">
+    <div class="reserve-copy">
+      <div class="sec-head"><span class="sec-num">07</span><h2>Reserva tu mesa</h2></div>
+      <p class="sec-sub">Elige día, hora y comensales. Te confirmamos al momento por WhatsApp o en TheFork.</p>
+      <ul class="reserve-perks">
+        <li>Confirmación inmediata</li>
+        <li>Grupos y celebraciones</li>
+        <li>Terraza · wine bar · cócteles</li>
+        <li>Abierto todos los días</li>
+      </ul>
+      <div class="reserve-quick">
+        <a class="btn btn-ghost btn-sm" id="linkTheFork" href="#" target="_blank" rel="noopener">Reservar en TheFork ↗</a>
+        <a class="btn btn-ghost btn-sm" id="linkWhatsApp" href="#" target="_blank" rel="noopener">WhatsApp directo ↗</a>
+      </div>
+    </div>
+    <form class="reserve-card" id="reserveForm" novalidate>
+      <h3>Nueva reserva</h3>
+      <div class="field-row">
+        <label class="field">
+          <span>Nombre *</span>
+          <input name="name" type="text" required placeholder="Tu nombre" autocomplete="name"/>
+        </label>
+        <label class="field">
+          <span>Teléfono *</span>
+          <input name="phone" type="tel" required placeholder="600 000 000" autocomplete="tel" inputmode="tel"/>
+        </label>
+      </div>
+      <label class="field">
+        <span>Email</span>
+        <input name="email" type="email" placeholder="opcional@email.com" autocomplete="email"/>
+      </label>
+      <div class="field-row three">
+        <label class="field">
+          <span>Fecha *</span>
+          <input name="date" type="date" required/>
+        </label>
+        <label class="field">
+          <span>Hora *</span>
+          <select name="time" required></select>
+        </label>
+        <label class="field">
+          <span>Personas *</span>
+          <select name="guests" required></select>
+        </label>
+      </div>
+      <label class="field">
+        <span>Zona preferida</span>
+        <select name="zone">
+          <option value="Sin preferencia">Sin preferencia</option>
+          <option value="Interior">Interior</option>
+          <option value="Terraza">Terraza</option>
+          <option value="Barra">Barra</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Notas / alergias / celebración</span>
+        <textarea name="notes" rows="3" placeholder="Cumpleaños, trona, alergias…"></textarea>
+      </label>
+      <label class="check">
+        <input type="checkbox" name="terms" required/>
+        <span>Acepto que el restaurante use estos datos para gestionar mi reserva.</span>
+      </label>
+      <button class="btn btn-gold btn-block" type="submit">Confirmar reserva</button>
+      <p class="form-note">También puedes reservar en <button type="button" class="text-link" id="openTheForkBtn">TheFork</button> con disponibilidad en tiempo real.</p>
+    </form>
+  </div>
+</section>
+
+<!-- VISÍTANOS -->
+<section id="visitanos" class="section">
+  <div class="wrap visit-grid">
+    <div>
+      <div class="sec-head"><span class="sec-num">08</span><h2>Visítanos</h2></div>
+      <ul class="info-list">
+        <li>
+          <svg viewBox="0 0 24 24" stroke-width="2" fill="none"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><strong>Dirección</strong><span id="infoAddress">Plaza del Sol, 35 · 28938 Móstoles</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" stroke-width="2" fill="none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <div><strong>Horario</strong><span>Cocina y barra · 13:00 – 01:00<br/>Desayunos desde primera hora</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" stroke-width="2" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div><strong>Teléfono</strong><a id="infoPhone" href="tel:+34659502225">659 50 22 25</a></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" stroke-width="2" fill="none"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17l-6.1 3.6 1.4-6.8L2.2 9.1l6.9-.8Z"/></svg>
+          <div><strong>Valoración</strong><span>8,9 / 10 · 152 opiniones en TheFork</span></div>
+        </li>
+      </ul>
+      <div class="chips" id="serviceChips"></div>
+      <div class="visit-cta">
+        <a class="btn btn-gold" id="btnMaps" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+        <button class="btn btn-ghost" type="button" data-open-reserve>Reservar</button>
+        <a class="btn btn-ghost" id="btnDelivery" href="#" target="_blank" rel="noopener">A domicilio</a>
+      </div>
+    </div>
+    <div class="visit-map">
+      <iframe title="Mapa Destino Raíz" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Plaza%20del%20Sol%2C%2035%2C%2028938%20M%C3%B3stoles&t=&z=16&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <a class="brand" href="#top">DESTINO<span>raíz</span></a>
+      <p>Sabor con raíz en el corazón de Móstoles. Cocina mediterránea, brasa, desayunos y coctelería en la Plaza del Sol.</p>
+    </div>
+    <div>
+      <h5>Explorar</h5>
+      <nav>
+        <a href="#promos">Promociones</a>
+        <a href="#carta">Carta</a>
+        <a href="#desayunos">Desayunos</a>
+        <a href="#bebidas">Bebidas</a>
+        <a href="#reservas">Reservas</a>
+      </nav>
+    </div>
+    <div>
+      <h5>Enlaces</h5>
+      <nav>
+        <a id="footTheFork" href="#" target="_blank" rel="noopener">TheFork · reservas ↗</a>
+        <a id="footUber" href="#" target="_blank" rel="noopener">Uber Eats · domicilio ↗</a>
+        <a id="footOriginal" href="#" target="_blank" rel="noopener">Carta Ágora original ↗</a>
+      </nav>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Destino Raíz · Móstoles</span>
+    <span>Precios con IVA · Carta actualizada desde su menú digital</span>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn-ghost btn-sm" href="#carta">Carta</a>
+  <button class="btn btn-gold btn-sm" type="button" data-open-reserve>Reservar mesa</button>
+</div>
+
+<button id="toTop" aria-label="Volver arriba">↑</button>
+
+<!-- DISH MODAL -->
+<div class="modal" id="dishModal" aria-hidden="true" role="dialog" aria-labelledby="dishModalTitle">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-sheet" role="document">
+    <button class="modal-x" type="button" data-close-modal aria-label="Cerrar">✕</button>
+    <div class="modal-img-wrap"><img id="dishModalImg" alt=""/></div>
+    <div class="modal-body">
+      <p class="modal-kicker" id="dishModalCat"></p>
+      <h3 id="dishModalTitle"></h3>
+      <p class="modal-price" id="dishModalPrice"></p>
+      <p class="modal-desc" id="dishModalDesc"></p>
+      <button class="btn btn-gold btn-block" type="button" data-open-reserve data-close-modal>Reservar para probarlo</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESERVE MODAL (mobile shortcut) -->
+<div class="modal" id="reserveModal" aria-hidden="true" role="dialog" aria-labelledby="reserveModalTitle">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-sheet reserve-sheet" role="document">
+    <button class="modal-x" type="button" data-close-modal aria-label="Cerrar">✕</button>
+    <div class="modal-body">
+      <h3 id="reserveModalTitle">Reservar mesa</h3>
+      <p class="modal-lead">Te llevamos al formulario completo o a TheFork.</p>
+      <button class="btn btn-gold btn-block" type="button" id="goReserveForm">Completar reserva aquí</button>
+      <a class="btn btn-ghost btn-block" id="modalTheFork" href="#" target="_blank" rel="noopener">Abrir TheFork ↗</a>
+      <a class="btn btn-ghost btn-block" id="modalWhatsApp" href="#" target="_blank" rel="noopener">WhatsApp ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS TOAST / CONFIRMATION -->
+<div class="modal" id="successModal" aria-hidden="true" role="dialog" aria-labelledby="successTitle">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-sheet success-sheet" role="document">
+    <button class="modal-x" type="button" data-close-modal aria-label="Cerrar">✕</button>
+    <div class="modal-body success-body">
+      <div class="success-icon">✓</div>
+      <h3 id="successTitle">¡Reserva enviada!</h3>
+      <p id="successText"></p>
+      <div class="success-actions">
+        <a class="btn btn-gold" id="successWa" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+        <button class="btn btn-ghost" type="button" data-close-modal>Cerrar</button>
+      </div>
+      <p class="form-note">Guarda el código de reserva: <b id="successCode"></b></p>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
