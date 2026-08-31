@@ -114,7 +114,7 @@ button{cursor:pointer;border:none;background:none}
   display:block;width:20px;height:2.5px;border-radius:2px;
   background:var(--gold);
   box-shadow:0 0 0 0.5px rgba(233,165,79,.35);
-  transition:transform .3s,opacity .3s,width .2s;
+  transition:none;
 }
 .burger[aria-expanded="true"]{
   background:rgba(233,165,79,.2);
@@ -140,20 +140,15 @@ button{cursor:pointer;border:none;background:none}
   :root{--nav-h:64px}
 }
 
-/* mobile nav — snappy open/close (no heavy blur = less lag on phones) */
+/* mobile nav — instant open/close (no animation lag) */
 .mnav{
-  position:fixed;inset:0;z-index:200;background:rgba(10,8,6,.98);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
-  opacity:0;visibility:hidden;pointer-events:none;
-  transform:translate3d(0,-12px,0);
-  transition:opacity .14s ease-out, transform .14s ease-out, visibility 0s linear .14s;
+  position:fixed;inset:0;z-index:200;background:#0a0806;
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:22px;
   padding:24px;
-  will-change:opacity,transform;
 }
 .mnav.open{
-  opacity:1;visibility:visible;pointer-events:auto;
-  transform:translate3d(0,0,0);
-  transition:opacity .14s ease-out, transform .14s ease-out, visibility 0s linear 0s;
+  display:flex;
 }
 .mnav-links{display:flex;flex-direction:column;align-items:center;gap:18px;max-height:min(70dvh,560px);overflow:auto;width:min(100%,340px);padding:0 4px}
 .mnav-links > a{font-family:var(--serif);font-size:1.55rem;color:var(--cream)}

@@ -710,34 +710,28 @@
       document.body.classList.remove('lock');
     }
     function openMnav() {
-      /* force style flush so first open never feels "stuck" one frame */
-      void mnav.offsetWidth;
       mnav.classList.add('open');
       mnav.setAttribute('aria-hidden', 'false');
       burger.setAttribute('aria-expanded', 'true');
       document.body.classList.add('lock');
     }
     function toggleMnav(e) {
-      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       if (mnav.classList.contains('open')) closeMnav();
       else openMnav();
     }
-    /* pointerup = instant on touch (no 300ms click delay feel) */
-    burger.addEventListener('pointerup', function (e) {
+    /* pointerdown = fires before click; fastest feel on mobile */
+    burger.addEventListener('pointerdown', function (e) {
       if (e.pointerType === 'mouse' && e.button !== 0) return;
       toggleMnav(e);
-    });
-    burger.addEventListener('click', function (e) {
-      /* keyboard / fallback only if pointerup didn't run */
-      if (e.detail === 0) toggleMnav(e);
-    });
-    $('#mnavClose').addEventListener('pointerup', function (e) {
+    }, { passive: false });
+    $('#mnavClose').addEventListener('pointerdown', function (e) {
       e.preventDefault();
       closeMnav();
-    });
-    $('#mnavClose').addEventListener('click', function (e) {
-      if (e.detail === 0) closeMnav();
-    });
+    }, { passive: false });
     $all('a', mnav).forEach(function (a) {
       a.addEventListener('click', closeMnav);
     });
