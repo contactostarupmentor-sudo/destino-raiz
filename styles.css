@@ -94,15 +94,47 @@ button{cursor:pointer;border:none;background:none}
   border:1px solid rgba(233,165,79,.28);margin-top:4px;
 }
 .nav-drop-sep{height:1px;background:var(--line);margin:6px 4px}
-.bar-right{display:flex;align-items:center;gap:8px}
+.bar-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .burger{
-  display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
-  width:44px;height:44px;border-radius:12px;border:1px solid var(--line);padding:0 12px;
+  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  width:46px;height:46px;border-radius:14px;flex-shrink:0;
+  border:1.5px solid rgba(233,165,79,.55);
+  background:rgba(14,11,8,.72);
+  box-shadow:0 4px 16px rgba(0,0,0,.35), inset 0 0 0 1px rgba(233,165,79,.12);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  padding:0;cursor:pointer;
+  transition:background .2s,border-color .2s,box-shadow .2s;
 }
-.burger span{display:block;height:2px;background:var(--gold);border-radius:2px;transition:transform .3s,opacity .3s}
-.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.burger:hover,.burger:focus-visible{
+  background:rgba(233,165,79,.16);
+  border-color:var(--gold);
+  box-shadow:0 4px 18px rgba(233,165,79,.25);
+}
+.burger:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.burger span{
+  display:block;width:20px;height:2.5px;border-radius:2px;
+  background:var(--gold);
+  box-shadow:0 0 0 0.5px rgba(233,165,79,.35);
+  transition:transform .3s,opacity .3s,width .2s;
+}
+.burger[aria-expanded="true"]{
+  background:rgba(233,165,79,.2);
+  border-color:var(--gold);
+}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(8.5px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0;width:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8.5px) rotate(-45deg)}
+/* On hero (not scrolled): even stronger so it never disappears on the photo */
+.topbar:not(.scrolled) .burger{
+  background:rgba(10,8,6,.82);
+  border-color:rgba(233,165,79,.75);
+  box-shadow:0 6px 20px rgba(0,0,0,.45);
+}
+.topbar:not(.scrolled) .burger span{
+  background:#f0c27a;
+  height:3px;
+  width:22px;
+}
 @media(min-width:960px){
   .links{display:flex}
   .burger{display:none}
