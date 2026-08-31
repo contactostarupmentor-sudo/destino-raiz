@@ -710,16 +710,40 @@
       document.body.classList.remove('lock');
     }
     function openMnav() {
+      /* force style flush so first open never feels "stuck" one frame */
+      void mnav.offsetWidth;
       mnav.classList.add('open');
       mnav.setAttribute('aria-hidden', 'false');
       burger.setAttribute('aria-expanded', 'true');
       document.body.classList.add('lock');
     }
-    burger.addEventListener('click', function () {
-      if (mnav.classList.contains('open')) closeMnav(); else openMnav();
+    function toggleMnav(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (mnav.classList.contains('open')) closeMnav();
+      else openMnav();
+    }
+    /* pointerup = instant on touch (no 300ms click delay feel) */
+    burger.addEventListener('pointerup', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      toggleMnav(e);
     });
-    $('#mnavClose').addEventListener('click', closeMnav);
-    $all('a', mnav).forEach(function (a) { a.addEventListener('click', closeMnav); });
+    burger.addEventListener('click', function (e) {
+      /* keyboard / fallback only if pointerup didn't run */
+      if (e.detail === 0) toggleMnav(e);
+    });
+    $('#mnavClose').addEventListener('pointerup', function (e) {
+      e.preventDefault();
+      closeMnav();
+    });
+    $('#mnavClose').addEventListener('click', function (e) {
+      if (e.detail === 0) closeMnav();
+    });
+    $all('a', mnav).forEach(function (a) {
+      a.addEventListener('click', closeMnav);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mnav.classList.contains('open')) closeMnav();
+    });
 
     window.addEventListener('scroll', function () {
       var y = window.scrollY || 0;
