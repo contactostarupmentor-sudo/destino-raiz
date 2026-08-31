@@ -703,35 +703,57 @@
     var mnav = $('#mnav');
     var burger = $('#burger');
 
+    var touchGuardUntil = 0;
     function closeMnav() {
       mnav.classList.remove('open');
       mnav.setAttribute('aria-hidden', 'true');
       burger.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('lock');
+      document.body.classList.remove('mnav-open');
     }
     function openMnav() {
       mnav.classList.add('open');
       mnav.setAttribute('aria-hidden', 'false');
       burger.setAttribute('aria-expanded', 'true');
-      document.body.classList.add('lock');
+      document.body.classList.add('mnav-open');
     }
-    function toggleMnav(e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
+    function toggleMnav() {
       if (mnav.classList.contains('open')) closeMnav();
       else openMnav();
     }
-    /* pointerdown = fires before click; fastest feel on mobile */
-    burger.addEventListener('pointerdown', function (e) {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
-      toggleMnav(e);
+    function fromTouch(e) {
+      /* block the delayed synthetic click (~300ms) that would toggle twice */
+      touchGuardUntil = Date.now() + 650;
+      if (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }
+    /* touchstart = earliest event on phones; no display:none reflow */
+    burger.addEventListener('touchstart', function (e) {
+      fromTouch(e);
+      toggleMnav();
     }, { passive: false });
-    $('#mnavClose').addEventListener('pointerdown', function (e) {
-      e.preventDefault();
+    burger.addEventListener('click', function (e) {
+      if (Date.now() < touchGuardUntil) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return;
+      }
+      toggleMnav();
+    });
+    function closeFromBtn(e) {
+      fromTouch(e);
       closeMnav();
-    }, { passive: false });
+    }
+    $('#mnavClose').addEventListener('touchstart', closeFromBtn, { passive: false });
+    $('#mnavClose').addEventListener('click', function (e) {
+      if (Date.now() < touchGuardUntil) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return;
+      }
+      closeMnav();
+    });
     $all('a', mnav).forEach(function (a) {
       a.addEventListener('click', closeMnav);
     });
@@ -971,6 +993,8 @@
   }
 
   /* ---------- init ---------- */
+  /* Bind menu FIRST so first tap is never waiting on heavy DOM builds */
+  wireNav();
   wireMeta();
   buildHero();
   buildTicker();
@@ -984,6 +1008,5 @@
   quoteBg();
   wireModals();
   wireSearch();
-  wireNav();
   wireReserveForm();
 })();

@@ -140,17 +140,22 @@ button{cursor:pointer;border:none;background:none}
   :root{--nav-h:64px}
 }
 
-/* mobile nav — instant open/close (no animation lag) */
+/* mobile nav — always composited, toggle only visibility (no display/reflow lag) */
 .mnav{
   position:fixed;inset:0;z-index:200;background:#0a0806;
-  display:none;
-  flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
   padding:24px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  /* keep off-screen hit-testing off; no transitions on purpose */
+  transform:translateZ(0);
+  contain:strict;
+  content-visibility:auto;
 }
 .mnav.open{
-  display:flex;
+  opacity:1;visibility:visible;pointer-events:auto;
+  content-visibility:visible;
 }
-.mnav-links{display:flex;flex-direction:column;align-items:center;gap:18px;max-height:min(70dvh,560px);overflow:auto;width:min(100%,340px);padding:0 4px}
+.mnav-links{display:flex;flex-direction:column;align-items:center;gap:18px;max-height:min(70dvh,560px);overflow:auto;width:min(100%,340px);padding:0 4px;-webkit-overflow-scrolling:touch}
 .mnav-links > a{font-family:var(--serif);font-size:1.55rem;color:var(--cream)}
 .mnav-links > a:hover{color:var(--gold)}
 .mnav-barra{width:100%;text-align:center}
@@ -180,7 +185,9 @@ button{cursor:pointer;border:none;background:none}
   position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:16px;
   width:44px;height:44px;border-radius:50%;border:1px solid var(--line);color:var(--gold);font-size:1.1rem;
 }
+/* only modals use body.lock; mobile menu does not (overflow:hidden = lag on phones) */
 body.lock{overflow:hidden;touch-action:none}
+body.mnav-open{overscroll-behavior:none}
 
 /* hero */
 .hero{
